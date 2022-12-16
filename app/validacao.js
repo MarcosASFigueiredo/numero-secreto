@@ -1,10 +1,19 @@
 function verificaSeOChutePossuiUmValorValido() {
     const numero = +chute
     if (chuteForInvalido(numero)) {
-        elementoChute.innerHTML += '<div>Valor inválido</div>'
-        return
-    }
+        if (chute.toUpperCase() === "GAME OVER") {
+            document.body.innerHTML = `
+            <h2>Game Over!!!</h2>
+            <h3>Pressione o botão para jogar novamente</h3>
+            <button id="jogar-novamente" class="btn-jogar" >Jogar novamente</button>
+            `
+            document.body.style.backgroundColor = "black";
+        } else {
+            elementoChute.innerHTML += '<div>Valor inválido</div>'
+            return
+        }
 
+    }
     if (numeroForMaiorOuMenorQueOValorPermitido(numero)) {
         elementoChute.innerHTML += `
         <div>Valor inválido: Fale um némero entre ${menorValor} e ${maiorValor}</div>
@@ -28,7 +37,6 @@ function verificaSeOChutePossuiUmValorValido() {
         <div>O número secreto é maior <i class="fa-solid fa-arrow-up"></i></div>
         `
     }
-
 }
 
 function chuteForInvalido(numero) {
@@ -38,6 +46,7 @@ function chuteForInvalido(numero) {
 function numeroForMaiorOuMenorQueOValorPermitido(numero) {
     return numero > maiorValor || numero < menorValor
 }
+
 
 document.body.addEventListener('click', (e) => {
     if (e.target.id == 'jogar-novamente') {
